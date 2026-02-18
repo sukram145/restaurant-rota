@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Restaurant Staff Rota</title>
+<title>Restaurant Staff Rota - Secure</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <style>
@@ -20,6 +20,47 @@ body{
   background:var(--light);
   margin:0;
   padding:15px;
+}
+
+/* LOGIN SCREEN */
+#loginScreen{
+  max-width:400px;
+  margin:80px auto;
+  background:#fff;
+  padding:25px;
+  border-radius:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+#loginScreen input{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border:1px solid var(--border);
+  border-radius:6px;
+  font-size:16px;
+}
+
+#loginScreen button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  font-size:16px;
+  border:none;
+  border-radius:6px;
+  background:#2563eb;
+  color:white;
+}
+
+#errorMsg{
+  color:red;
+  margin-top:10px;
+  display:none;
+}
+
+/* MAIN APP */
+#app{
+  display:none;
 }
 
 .container{
@@ -97,20 +138,22 @@ select.shift{
 .shift.mid{background:var(--mid);}
 .shift.closing{background:var(--closing);}
 .shift.off{background:var(--off);}
-
-@media(min-width:768px){
-  .controls input,
-  .controls select{
-    width:auto;
-  }
-  button{
-    width:auto;
-  }
-}
 </style>
 </head>
 
 <body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+  <h2>🔒 Secure Login</h2>
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <div id="errorMsg">Incorrect username or password</div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
 <div class="container">
 
 <div class="card controls">
@@ -166,8 +209,23 @@ select.shift{
 
 </div>
 </div>
+</div>
 
 <script>
+/* LOGIN SYSTEM */
+function login(){
+  const user=document.getElementById("username").value;
+  const pass=document.getElementById("password").value;
+
+  if(user==="royaljava" && pass==="Incorrect90!"){
+    document.getElementById("loginScreen").style.display="none";
+    document.getElementById("app").style.display="block";
+  }else{
+    document.getElementById("errorMsg").style.display="block";
+  }
+}
+
+/* ROTA SYSTEM */
 let staff=[];
 const days=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 
@@ -176,7 +234,6 @@ const shiftsTaboche=["OFF","7AM–5PM","9AM–5PM","10AM–8PM"];
 
 let currentWeekDates=[];
 
-/* AUTO LOAD CURRENT WEEK */
 window.onload=function(){
   const today=new Date();
   const sunday=new Date(today.setDate(today.getDate()-today.getDay()));
