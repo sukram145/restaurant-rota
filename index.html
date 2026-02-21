@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Restaurant Weekly Rota - Premium</title>
+<title>Restaurant Weekly Rota - Premium Edition</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
@@ -12,137 +12,88 @@
   --mid:#f59e0b;
   --closing:#7c3aed;
   --off:#dc2626;
+  --bg:#f8fafc;
   --border:#e5e7eb;
   --muted:#6b7280;
-  --bg:#f8fafc;
   --header-bg:#111827;
-  --card-bg:#ffffff;
 }
 
 *{box-sizing:border-box}
 body{
   font-family:'Poppins', Arial, sans-serif;
-  margin:0;
   background:var(--bg);
   color:#111827;
+  margin:0;
   padding:20px;
 }
 
-/* LOGIN SCREEN */
+/* LOGIN */
 #loginScreen{
-  max-width:420px;
-  margin:70px auto;
-  background:var(--card-bg);
-  padding:30px;
-  border-radius:12px;
+  max-width:420px;margin:70px auto;background:#fff;padding:30px;border-radius:12px;
   box-shadow:0 8px 30px rgba(0,0,0,0.08);
 }
-#loginScreen h2{margin-bottom:14px;text-align:center}
-#loginScreen input{
-  width:100%;
-  padding:12px;
-  margin:10px 0;
-  border:1px solid var(--border);
-  border-radius:8px;
-  font-size:15px;
-}
-#loginScreen button{
-  width:100%;
-  padding:12px;
-  font-size:16px;
-  border:none;
-  border-radius:8px;
-  background:var(--royal);
-  color:#fff;
-  cursor:pointer;
-}
-#errorMsg{color:#b91c1c;text-align:center;display:none;margin-top:10px}
+#loginScreen h2{text-align:center;margin-bottom:16px}
+#loginScreen input{width:100%;padding:12px;margin:10px 0;border:1px solid var(--border);border-radius:8px}
+#loginScreen button{width:100%;padding:12px;font-size:16px;border:none;border-radius:8px;background:var(--royal);color:#fff;cursor:pointer}
+#errorMsg{display:none;text-align:center;color:#b91c1c;margin-top:10px}
 
 /* APP */
 #app{display:none}
 .container{max-width:1200px;margin:auto}
 .card{
-  background:var(--card-bg);
+  background:#fff;
   padding:20px;
   border-radius:12px;
   box-shadow:0 6px 24px rgba(0,0,0,0.06);
   margin-bottom:24px;
 }
+h1{margin-top:0}
 button{
-  padding:10px 14px;
-  font-size:15px;
-  border:none;
-  border-radius:8px;
   background:var(--royal);
-  color:#fff;
-  cursor:pointer;
+  color:#fff;border:none;border-radius:8px;cursor:pointer;
+  padding:10px 14px;font-size:15px;
 }
-button.small{font-size:14px;padding:8px 10px}
+button.small{padding:8px 10px;font-size:14px}
 .row{display:flex;gap:10px;flex-wrap:wrap}
 .row>*{flex:1}
-select,input{font-size:15px;border:1px solid var(--border);border-radius:6px;padding:10px;width:100%}
-.note{font-size:13px;color:var(--muted);margin-top:6px}
+select,input{border:1px solid var(--border);border-radius:6px;padding:10px;width:100%;font-size:15px}
 
-/* Table Styling */
+.note{color:var(--muted);font-size:13px;margin-top:6px}
+
+/* TABLES */
 #rotaContent{
-  padding:24px 20px;
-  background:#fff;
-  border-radius:14px;
+  background:#fff;border-radius:14px;padding:24px 20px;
   box-shadow:0 6px 24px rgba(0,0,0,0.05);
 }
 table{
-  width:100%;
-  border-collapse:collapse;
-  font-size:14px;
-  margin-top:8px;
-  border-radius:10px;
-  overflow:hidden;
+  width:100%;border-collapse:collapse;margin-top:8px;font-size:14px;
 }
 th{
   background:var(--header-bg);
-  color:white;
-  font-weight:600;
-  padding:10px;
+  color:white;padding:10px;font-weight:600;text-align:center;
 }
 td{
-  border:1px solid #e5e7eb;
-  padding:8px;
-  text-align:center;
+  border:1px solid #e5e7eb;padding:8px;text-align:center;
 }
-tr:last-child td:first-child{border-bottom-left-radius:10px}
-tr:last-child td:last-child{border-bottom-right-radius:10px}
+.sectionTitle{
+  font-weight:700;font-size:17px;margin:24px 0 8px;border-bottom:2px solid var(--border);padding-bottom:4px;
+}
 
+/* SHIFT COLORS */
 select.shift{
-  width:100%;
-  padding:8px;
-  font-size:13px;
-  border:none;
-  border-radius:6px;
-  color:#fff;
-  font-weight:600;
-  cursor:pointer;
-  text-transform:uppercase;
-  letter-spacing:0.4px;
+  width:100%;padding:8px;font-weight:600;border:none;border-radius:6px;
+  color:white;text-transform:uppercase;cursor:pointer;
 }
 .shift.morning{background:var(--royal)}
 .shift.mid{background:var(--mid)}
 .shift.closing{background:var(--closing)}
 .shift.off{background:var(--off)}
 
-.sectionTitle{
-  font-weight:700;
-  font-size:17px;
-  margin:24px 0 8px 0;
-  color:#111827;
-  border-bottom:2px solid var(--border);
-  padding-bottom:4px;
-}
-
-/* Export/Footer Area (hidden in export) */
+/* UI Footer */
 #exportButtons{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
-#footerMsg{font-size:13px;color:var(--muted);margin-top:6px;text-align:center}
+#footerMsg{font-size:13px;color:var(--muted);margin-top:8px;text-align:center}
 
-/* Make exported image fill with white clean background */
+/* hide non-essential UI in image export */
 @media print{
   #exportButtons,#footerMsg{display:none!important}
 }
@@ -159,17 +110,16 @@ select.shift{
   <div id="errorMsg">Incorrect username or password</div>
 </div>
 
-<!-- APP -->
+<!-- MAIN APP -->
 <div id="app" aria-hidden="true">
   <div class="container">
-    <!-- Setup Card -->
+
     <div class="card">
       <h1>🧾 Staff Setup</h1>
       <div class="row">
         <input id="name" placeholder="Staff Name"/>
         <select id="restaurant">
-          <option>Royal Java</option>
-          <option>Taboche</option>
+          <option>Royal Java</option><option>Taboche</option>
         </select>
       </div>
       <div class="row">
@@ -185,40 +135,28 @@ select.shift{
         <button onclick="addStaff()">Add Staff</button>
         <button class="small" onclick="resetRota()">Reset All</button>
       </div>
-      <div class="row" style="margin-top:10px">
+      <div class="row" style="margin-top:8px">
         <input type="date" id="weekStart"/>
         <button class="small" onclick="updateWeek()">Set Week</button>
       </div>
-      <div id="saveLoad" style="margin-top:8px">
-        <button class="small" onclick="saveToLocal()">Save</button>
-        <button class="small" onclick="loadFromLocal()">Load</button>
-        <button class="small" onclick="clearSaved()">Clear</button>
-      </div>
-      <div class="note">Mid shift = <strong>9AM–7PM</strong></div>
+      <div class="note">Mid shift = <strong>9AM–7PM</strong> • Your staff list stays saved until Reset All</div>
     </div>
 
-    <!-- ROTA -->
     <div class="card" id="rotaArea">
       <div id="rotaContent">
-        <h2 style="text-align:center;font-size:20px;margin-bottom:12px" id="weekTitle">
-          Weekly Rota
-        </h2>
+        <h2 style="text-align:center;margin-bottom:16px" id="weekTitle">Weekly Rota</h2>
 
         <div class="sectionTitle">Royal Java</div>
-        <div class="table-wrapper">
-          <table>
-            <thead><tr id="royalHeader"></tr></thead>
-            <tbody id="royalJava"></tbody>
-          </table>
-        </div>
+        <table>
+          <thead><tr id="royalHeader"></tr></thead>
+          <tbody id="royalJava"></tbody>
+        </table>
 
         <div class="sectionTitle">Taboche</div>
-        <div class="table-wrapper">
-          <table>
-            <thead><tr id="tabocheHeader"></tr></thead>
-            <tbody id="taboche"></tbody>
-          </table>
-        </div>
+        <table>
+          <thead><tr id="tabocheHeader"></tr></thead>
+          <tbody id="taboche"></tbody>
+        </table>
       </div>
 
       <div id="exportButtons">
@@ -226,24 +164,15 @@ select.shift{
         <button class="small" onclick="downloadCSV()">Download CSV</button>
         <button class="small" onclick="shareViaWhatsApp()">📱 Share to WhatsApp</button>
       </div>
-      <div id="footerMsg">Tip: Click any dropdown to update shifts.</div>
+      <div id="footerMsg">Tip: Use Reset All to start a fresh rota.</div>
     </div>
   </div>
 </div>
 
 <script>
-let staff = [];
-const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-const shiftsRoyal=[
-  {value:"OFF",label:"OFF"},
-  {value:"7AM–5PM",label:"7AM–5PM"},
-  {value:"9AM–7PM",label:"9AM–7PM"},
-  {value:"11AM–9PM",label:"11AM–9PM"}];
-const shiftsTaboche=[
-  {value:"OFF",label:"OFF"},
-  {value:"7AM–5PM",label:"7AM–5PM"},
-  {value:"9AM–7PM",label:"9AM–7PM"},
-  {value:"10AM–8PM",label:"10AM–8PM"}];
+let staff=[];const days=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const shiftsRoyal=[{value:"OFF",label:"OFF"},{value:"7AM–5PM",label:"7AM–5PM"},{value:"9AM–7PM",label:"9AM–7PM"},{value:"11AM–9PM",label:"11AM–9PM"}];
+const shiftsTaboche=[{value:"OFF",label:"OFF"},{value:"7AM–5PM",label:"7AM–5PM"},{value:"9AM–7PM",label:"9AM–7PM"},{value:"10AM–8PM",label:"10AM–8PM"}];
 let currentWeekDates=[];
 
 /* LOGIN */
@@ -252,144 +181,198 @@ function login(){
   const p=document.getElementById("password").value;
   if(u==="royaljava"&&p==="Incorrect90!"){
     document.getElementById("loginScreen").style.display="none";
-    const app=document.getElementById("app");app.style.display="block";
+    document.getElementById("app").style.display="block";
     initializeWeekToCurrentSunday();
-    loadFromLocal();
+    loadStoredRota();
   }else{
-    const e=document.getElementById("errorMsg");
-    e.style.display="block";setTimeout(()=>e.style.display="none",3000);
+    const err=document.getElementById("errorMsg");
+    err.style.display="block";setTimeout(()=>err.style.display="none",3000);
   }
 }
+
+/* WEEK START */
 function initializeWeekToCurrentSunday(){
-  const today=new Date();const sun=new Date(today.getFullYear(),today.getMonth(),today.getDate()-today.getDay());
-  document.getElementById("weekStart").valueAsDate=sun;updateWeek();
+  const today=new Date();
+  const sunday=new Date(today.getFullYear(),today.getMonth(),today.getDate()-today.getDay());
+  document.getElementById("weekStart").valueAsDate=sunday;
+  updateWeek();
 }
-function mapDefaultShift(t,r){
-  const o=r==="Royal Java"?shiftsRoyal:shiftsTaboche;
-  if(t==="Morning")return o[1].value;
-  if(t==="Mid")return o[2].value;
-  return o[3].value;
+
+/* MAP SHIFT */
+function mapDefaultShift(type,restaurant){
+  const opts=restaurant==="Royal Java"?shiftsRoyal:shiftsTaboche;
+  if(type==="Morning")return opts[1].value;
+  if(type==="Mid")return opts[2].value;
+  return opts[3].value;
 }
+
+/* ADD STAFF */
 function addStaff(){
-  const n=document.getElementById("name").value.trim();
-  if(!n)return alert("Enter name");
-  const r=document.getElementById("restaurant").value;
+  const name=document.getElementById("name").value.trim();
+  if(!name)return alert("Enter staff name");
+  const restaurant=document.getElementById("restaurant").value;
   const off=document.getElementById("offDay").value;
-  const dType=document.getElementById("defaultShiftType").value;
-  const shift=mapDefaultShift(dType,r);
-  staff.push({name:n,restaurant:r,offDay:off,defaultShiftType:dType,defaultShift:shift,schedule:{}});
+  const defType=document.getElementById("defaultShiftType").value;
+  const defShift=mapDefaultShift(defType,restaurant);
+  const newStaff={name,restaurant,offDay:off,defaultShiftType:defType,defaultShift:defShift,schedule:{}};
+  staff.push(newStaff);
   document.getElementById("name").value="";
   renderRota();
+  autoSaveRota();
 }
+
+/* AUTO SAVE / LOAD */
+function autoSaveRota(){
+  const startKey=currentWeekDates.length?dateKey(currentWeekDates[0]):null;
+  localStorage.setItem("savedRota",JSON.stringify({weekStart:startKey,staff}));
+}
+
+function loadStoredRota(){
+  const raw=localStorage.getItem("savedRota");
+  if(!raw)return;
+  try{
+    const data=JSON.parse(raw);
+    if(data.staff){staff=data.staff;}
+    if(data.weekStart){
+      const p=data.weekStart.split("-");
+      document.getElementById("weekStart").valueAsDate=new Date(p[0],p[1]-1,p[2]);
+    }
+    updateWeek();renderRota();
+  }catch(e){console.error(e);}
+}
+
+/* WEEK UPDATE */
 function updateWeek(){
-  let start=document.getElementById("weekStart").value;if(!start)return;
-  let sd=new Date(start);sd=new Date(sd.getFullYear(),sd.getMonth(),sd.getDate()-sd.getDay());
-  currentWeekDates=[];for(let i=0;i<7;i++){currentWeekDates.push(new Date(sd.getFullYear(),sd.getMonth(),sd.getDate()+i));}
+  const start=document.getElementById("weekStart").value;
+  if(!start)return;
+  let d=new Date(start);
+  d=new Date(d.getFullYear(),d.getMonth(),d.getDate()-d.getDay());
+  currentWeekDates=[];
+  for(let i=0;i<7;i++){
+    currentWeekDates.push(new Date(d.getFullYear(),d.getMonth(),d.getDate()+i));
+  }
   const end=currentWeekDates[6];
-  document.getElementById("weekTitle").innerText=`Weekly Rota (${sd.toDateString()} - ${end.toDateString()})`;
+  document.getElementById("weekTitle").innerText=`Weekly Rota (${d.toDateString()} - ${end.toDateString()})`;
   renderHeaders();renderRota();
 }
+
+/* HEADERS */
 function renderHeaders(){
-  const h="<th>Staff</th>"+currentWeekDates.map(d=>`<th>${days[d.getDay()]}<br>${d.getDate()}</th>`).join("");
-  document.getElementById("royalHeader").innerHTML=h;
-  document.getElementById("tabocheHeader").innerHTML=h;
+  const header="<th>Staff</th>"+currentWeekDates.map(d=>`<th>${days[d.getDay()]}<br>${d.getDate()}</th>`).join("");
+  document.getElementById("royalHeader").innerHTML=header;
+  document.getElementById("tabocheHeader").innerHTML=header;
 }
-function getShiftClass(s){
-  if(s==="OFF")return"off";
-  if(s==="7AM–5PM")return"morning";
-  if(s==="9AM–7PM")return"mid";
-  if(s==="11AM–9PM"||s==="10AM–8PM")return"closing";
-  return"mid";
-}
+
+/* UTIL */
 function dateKey(d){return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
-function escapeHtml(s){return String(s).replace(/[&<>"'`=\/]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;','/':'&#x2F;','`':'&#x60;','=':'&#x3D;'}[c]));}
+function getShiftClass(s){if(s==="OFF")return"off";if(s==="7AM–5PM")return"morning";if(s==="9AM–7PM")return"mid";if(s==="11AM–9PM"||s==="10AM–8PM")return"closing";return"mid";}
+function escapeHtml(str){return String(str).replace(/[&<>"'`=\/]/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;','/':'&#x2F;','`':'&#x60;','=':'&#x3D;'}[s]));}
 function escapeJs(s){return String(s).replace(/'/g,"\\'").replace(/"/g,'\\"');}
+
+/* RENDER ROTA */
 function renderRota(){
-  const rB=document.getElementById("royalJava"),tB=document.getElementById("taboche");
-  rB.innerHTML="";tB.innerHTML="";
+  const rb=document.getElementById("royalJava"),tb=document.getElementById("taboche");
+  rb.innerHTML="";tb.innerHTML="";
   staff.forEach((m,i)=>{
     const row=document.createElement("tr");
     const sList=m.restaurant==="Royal Java"?shiftsRoyal:shiftsTaboche;
     let html=`<td><strong>${escapeHtml(m.name)}</strong></td>`;
-    currentWeekDates.forEach(d=>{
-      const k=dateKey(d);const day=days[d.getDay()];
-      const isOff=day===m.offDay;
-      const sel=m.schedule[k]||(isOff?"OFF":m.defaultShift);
-      const cls=getShiftClass(sel);
-      html+=`<td><select class="shift ${cls}" onchange="onShiftChange(${i},'${escapeJs(m.restaurant)}','${k}',this)">${sList.map(s=>`<option value="${s.value}" ${s.value===sel?"selected":""}>${s.label}</option>`).join("")}</select></td>`;
+    currentWeekDates.forEach(day=>{
+      const k=dateKey(day);
+      const dn=days[day.getDay()];
+      const isOff=dn===m.offDay;
+      const val=m.schedule[k]||(isOff?"OFF":m.defaultShift);
+      const cls=getShiftClass(val);
+      html+=`<td><select class="shift ${cls}" onchange="onShiftChange(${i},'${escapeJs(m.restaurant)}','${k}',this)">${sList.map(s=>`<option value="${s.value}" ${s.value===val?"selected":""}>${s.label}</option>`).join("")}</select></td>`;
     });
     row.innerHTML=html;
-    (m.restaurant==="Royal Java"?rB:tB).appendChild(row);
+    (m.restaurant==="Royal Java"?rb:tb).appendChild(row);
   });
 }
+
+/* UPDATE SHIFT */
 function onShiftChange(i,r,k,el){
-  const val=el.value;el.className="shift "+getShiftClass(val);
-  const mem=staff[i];const parts=k.split('-');const d=new Date(parts[0],parts[1]-1,parts[2]);
-  const day=days[d.getDay()];const implied=(day===mem.offDay)?"OFF":mem.defaultShift;
-  if(val===implied)delete mem.schedule[k];else mem.schedule[k]=val;
+  const v=el.value;el.className="shift "+getShiftClass(v);
+  const member=staff[i];
+  const parts=k.split('-');const d=new Date(parts[0],parts[1]-1,parts[2]);
+  const day=days[d.getDay()];
+  const implied=(day===member.offDay)?"OFF":member.defaultShift;
+  if(v===implied)delete member.schedule[k];else member.schedule[k]=v;
+  autoSaveRota();
 }
 
-/* EXPORT clean premium image */
+/* EXPORT IMAGE */
 function exportImage(){
-  const btns=document.getElementById("exportButtons"),foot=document.getElementById("footerMsg");
-  btns.style.display="none";foot.style.display="none";
+  const btn=document.getElementById("exportButtons"),foot=document.getElementById("footerMsg");
+  btn.style.display="none";foot.style.display="none";
   const el=document.getElementById("rotaContent");
-  el.style.boxShadow="0 0 40px rgba(0,0,0,0.1)";
-  el.style.borderRadius="12px";
-  el.style.padding="30px";
-  el.scrollIntoView({behavior:"instant",block:"start"});window.scrollTo(0,0);
-  html2canvas(el,{backgroundColor:"#ffffff",scale:3,scrollY:-window.scrollY,windowHeight:document.body.scrollHeight}).then(c=>{
+  html2canvas(el,{backgroundColor:"#ffffff",scale:3,scrollY:-window.scrollY,windowHeight:document.body.scrollHeight})
+  .then(c=>{
     const link=document.createElement("a");
     link.download="Premium_Rota.png";
     link.href=c.toDataURL("image/png");
     link.click();
-  }).finally(()=>{btns.style.display="flex";foot.style.display="block";});
+  }).finally(()=>{btn.style.display="flex";foot.style.display="block";});
 }
 
-/* SHARE to WhatsApp cleanly */
+/* SHARE WHATSAPP */
 function shareViaWhatsApp(){
-  if(currentWeekDates.length!==7)return alert("Set week first.");
-  const btns=document.getElementById("exportButtons"),foot=document.getElementById("footerMsg");
-  btns.style.display="none";foot.style.display="none";
+  if(currentWeekDates.length!==7)return alert("Set the week first.");
+  const btn=document.getElementById("exportButtons"),foot=document.getElementById("footerMsg");
+  btn.style.display="none";foot.style.display="none";
   const el=document.getElementById("rotaContent");
-  el.scrollIntoView({behavior:"instant",block:"start"});window.scrollTo(0,0);
   html2canvas(el,{backgroundColor:"#ffffff",scale:3,useCORS:true,scrollY:-window.scrollY,windowHeight:document.body.scrollHeight})
   .then(c=>{
     const link=document.createElement("a");
     link.download="Premium_Rota.png";
     link.href=c.toDataURL("image/png");
     link.click();
-    alert("📸 Premium rota image ready. Open WhatsApp Web and send the downloaded image.");
+    alert("📸 Rota ready! Open WhatsApp Web and send the saved image.");
     window.open("https://web.whatsapp.com/","_blank");
-  }).finally(()=>{btns.style.display="flex";foot.style.display="block";});
+  }).finally(()=>{btn.style.display="flex";foot.style.display="block";});
 }
 
-/* CSV + Save */
+/* CSV EXPORT */
 function downloadCSV(){
+  if(currentWeekDates.length!==7)return alert("Set the week first.");
   let csv="Restaurant,Staff";
-  currentWeekDates.forEach(d=>csv+=`,${days[d.getDay()]} ${d.getDate()}`);
+  currentWeekDates.forEach(d=>csv+=`,`+days[d.getDay()]+" "+d.getDate());
   csv+="\n";
-  ["Royal Java","Taboche"].forEach(g=>{
-    staff.filter(s=>s.restaurant===g).forEach(m=>{
-      const row=[g,m.name];
+  ["Royal Java","Taboche"].forEach(gr=>{
+    staff.filter(s=>s.restaurant===gr).forEach(m=>{
+      const row=[gr,m.name];
       currentWeekDates.forEach(d=>{
-        const k=dateKey(d);const day=days[d.getDay()];
-        const isOff=day===m.offDay;
+        const k=dateKey(d);
+        const dn=days[d.getDay()];
+        const isOff=dn===m.offDay;
         const val=m.schedule[k]||(isOff?"OFF":m.defaultShift);
         row.push(val);
       });
       csv+=row.map(v=>`"${v}"`).join(",")+"\n";
     });
   });
-  const blob=new Blob([csv],{type:"text/csv"});const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");a.href=url;a.download="rota.csv";a.click();
+  const blob=new Blob([csv],{type:"text/csv"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;a.download="rota.csv";a.click();
   URL.revokeObjectURL(url);
 }
-function saveToLocal(){localStorage.setItem("savedRota",JSON.stringify({weekStart:dateKey(currentWeekDates[0]),staff}));alert("Saved!");}
-function loadFromLocal(){const r=localStorage.getItem("savedRota");if(!r)return;const p=JSON.parse(r);const pr=p.weekStart.split('-');const d=new Date(pr[0],pr[1]-1,pr[2]);document.getElementById("weekStart").valueAsDate=d;staff=p.staff||[];updateWeek();}
-function clearSaved(){localStorage.removeItem("savedRota");alert("Cleared!");}
-function resetRota(){if(!confirm("Reset All?"))return;staff=[];initializeWeekToCurrentSunday();localStorage.removeItem("savedRota");}
-window.addEventListener('DOMContentLoaded',()=>{const t=new Date();const s=new Date(t.getFullYear(),t.getMonth(),t.getDate()-t.getDay());document.getElementById("weekStart").valueAsDate=s;});
+
+/* RESET */
+function resetRota(){
+  if(!confirm("This will clear all staff and saved rota. Are you sure?"))return;
+  staff=[];
+  localStorage.removeItem("savedRota");
+  initializeWeekToCurrentSunday();
+  renderRota();
+  alert("All data cleared!");
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  const today=new Date();
+  const sunday=new Date(today.getFullYear(),today.getMonth(),today.getDate()-today.getDay());
+  document.getElementById("weekStart").valueAsDate=sunday;
+});
 </script>
 </body>
 </html>
