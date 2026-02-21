@@ -2,594 +2,394 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Restaurant Staff Rota - Full Editable (Quick Fill & Copy)</title>
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Restaurant Weekly Rota - Premium</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 <style>
 :root{
-  --morning:#2563eb;
+  --royal:#2563eb;
   --mid:#f59e0b;
   --closing:#7c3aed;
   --off:#dc2626;
-  --light:#f9fafb;
   --border:#e5e7eb;
   --muted:#6b7280;
+  --bg:#f8fafc;
+  --header-bg:#111827;
+  --card-bg:#ffffff;
 }
+
 *{box-sizing:border-box}
 body{
-  font-family:"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  background:var(--light);
+  font-family:'Poppins', Arial, sans-serif;
   margin:0;
-  padding:18px;
+  background:var(--bg);
   color:#111827;
+  padding:20px;
 }
 
 /* LOGIN SCREEN */
 #loginScreen{
   max-width:420px;
   margin:70px auto;
-  background:#fff;
-  padding:26px;
-  border-radius:10px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  background:var(--card-bg);
+  padding:30px;
+  border-radius:12px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.08);
 }
-#loginScreen h2{margin:0 0 12px 0}
+#loginScreen h2{margin-bottom:14px;text-align:center}
 #loginScreen input{
   width:100%;
-  padding:10px;
-  margin:8px 0;
+  padding:12px;
+  margin:10px 0;
   border:1px solid var(--border);
-  border-radius:6px;
+  border-radius:8px;
   font-size:15px;
 }
 #loginScreen button{
   width:100%;
   padding:12px;
-  margin-top:10px;
   font-size:16px;
   border:none;
-  border-radius:6px;
-  background:#2563eb;
-  color:white;
+  border-radius:8px;
+  background:var(--royal);
+  color:#fff;
   cursor:pointer;
 }
-#errorMsg{
-  color:#b91c1c;
-  margin-top:10px;
-  display:none;
-}
+#errorMsg{color:#b91c1c;text-align:center;display:none;margin-top:10px}
 
-/* MAIN APP */
+/* APP */
 #app{display:none}
 .container{max-width:1200px;margin:auto}
 .card{
-  background:#fff;
-  padding:16px;
-  border-radius:10px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.04);
-  margin-bottom:20px;
+  background:var(--card-bg);
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 6px 24px rgba(0,0,0,0.06);
+  margin-bottom:24px;
 }
-h1,h2{margin:8px 0}
-.controls input,
-.controls select{
-  padding:10px;
-  margin:6px 0;
-  width:100%;
-  font-size:15px;
-  border:1px solid var(--border);
-  border-radius:6px;
-}
-.controls .row{display:flex;gap:10px}
-.controls .row > *{flex:1}
-
-/* Buttons */
 button{
-  padding:10px 12px;
-  margin-top:8px;
+  padding:10px 14px;
   font-size:15px;
   border:none;
-  border-radius:6px;
-  background:#2563eb;
-  color:white;
+  border-radius:8px;
+  background:var(--royal);
+  color:#fff;
   cursor:pointer;
 }
-.small{
-  padding:8px 10px;
-  font-size:14px;
-  width:auto;
-}
+button.small{font-size:14px;padding:8px 10px}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>*{flex:1}
+select,input{font-size:15px;border:1px solid var(--border);border-radius:6px;padding:10px;width:100%}
+.note{font-size:13px;color:var(--muted);margin-top:6px}
 
-/* Table */
-.table-wrapper{overflow-x:auto}
+/* Table Styling */
+#rotaContent{
+  padding:24px 20px;
+  background:#fff;
+  border-radius:14px;
+  box-shadow:0 6px 24px rgba(0,0,0,0.05);
+}
 table{
   width:100%;
   border-collapse:collapse;
   font-size:14px;
-  min-width:700px;
-}
-th,td{
-  border:1px solid var(--border);
-  padding:8px;
-  text-align:center;
-  vertical-align:middle;
+  margin-top:8px;
+  border-radius:10px;
+  overflow:hidden;
 }
 th{
-  background:#111827;
+  background:var(--header-bg);
   color:white;
   font-weight:600;
+  padding:10px;
 }
+td{
+  border:1px solid #e5e7eb;
+  padding:8px;
+  text-align:center;
+}
+tr:last-child td:first-child{border-bottom-left-radius:10px}
+tr:last-child td:last-child{border-bottom-right-radius:10px}
 
-/* Shift select styling */
 select.shift{
   width:100%;
   padding:8px;
   font-size:13px;
   border:none;
   border-radius:6px;
-  color:white;
-  font-weight:700;
+  color:#fff;
+  font-weight:600;
   cursor:pointer;
+  text-transform:uppercase;
+  letter-spacing:0.4px;
 }
-
-/* SHIFT COLORS */
-.shift.morning{background:var(--morning)}
+.shift.morning{background:var(--royal)}
 .shift.mid{background:var(--mid)}
 .shift.closing{background:var(--closing)}
 .shift.off{background:var(--off)}
 
-/* Utility */
-.actions{display:flex;gap:10px;flex-wrap:wrap}
-.note{font-size:13px;color:var(--muted);margin-top:8px}
-.footer{font-size:13px;color:var(--muted);margin-top:6px}
-.small-muted{font-size:12px;color:var(--muted);margin-left:8px}
+.sectionTitle{
+  font-weight:700;
+  font-size:17px;
+  margin:24px 0 8px 0;
+  color:#111827;
+  border-bottom:2px solid var(--border);
+  padding-bottom:4px;
+}
+
+/* Export/Footer Area (hidden in export) */
+#exportButtons{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+#footerMsg{font-size:13px;color:var(--muted);margin-top:6px;text-align:center}
+
+/* Make exported image fill with white clean background */
+@media print{
+  #exportButtons,#footerMsg{display:none!important}
+}
 </style>
 </head>
 <body>
 
-<!-- LOGIN SCREEN -->
+<!-- LOGIN -->
 <div id="loginScreen">
-  <h2>🔒 Secure Login</h2>
-  <input type="text" id="username" placeholder="Username" autocomplete="username" />
-  <input type="password" id="password" placeholder="Password" autocomplete="current-password" />
+  <h2>🔒 Staff Rota Access</h2>
+  <input id="username" placeholder="Username" autocomplete="username"/>
+  <input type="password" id="password" placeholder="Password" autocomplete="current-password"/>
   <button onclick="login()">Login</button>
   <div id="errorMsg">Incorrect username or password</div>
 </div>
 
-<!-- MAIN APP -->
+<!-- APP -->
 <div id="app" aria-hidden="true">
   <div class="container">
-
-    <div class="card controls" aria-label="Staff setup">
-      <h1>Staff Setup</h1>
-
+    <!-- Setup Card -->
+    <div class="card">
+      <h1>🧾 Staff Setup</h1>
       <div class="row">
-        <input id="name" placeholder="Staff Name" />
-        <select id="restaurant" title="Restaurant">
+        <input id="name" placeholder="Staff Name"/>
+        <select id="restaurant">
           <option>Royal Java</option>
           <option>Taboche</option>
         </select>
       </div>
-
       <div class="row">
-        <select id="offDay" title="Off day">
+        <select id="offDay">
           <option>Sun</option><option>Mon</option><option>Tue</option>
           <option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option>
         </select>
-
-        <select id="defaultShiftType" title="Default shift type">
-          <option>Morning</option>
-          <option>Mid</option>
-          <option>Closing</option>
+        <select id="defaultShiftType">
+          <option>Morning</option><option>Mid</option><option>Closing</option>
         </select>
       </div>
-
-      <div class="actions" style="margin-top:8px">
+      <div class="row">
         <button onclick="addStaff()">Add Staff</button>
         <button class="small" onclick="resetRota()">Reset All</button>
       </div>
+      <div class="row" style="margin-top:10px">
+        <input type="date" id="weekStart"/>
+        <button class="small" onclick="updateWeek()">Set Week</button>
+      </div>
+      <div id="saveLoad" style="margin-top:8px">
+        <button class="small" onclick="saveToLocal()">Save</button>
+        <button class="small" onclick="loadFromLocal()">Load</button>
+        <button class="small" onclick="clearSaved()">Clear</button>
+      </div>
+      <div class="note">Mid shift = <strong>9AM–7PM</strong></div>
+    </div>
 
-      <div style="margin-top:12px">
-        <label><strong>Week Start (Sunday)</strong></label>
-        <div class="row" style="margin-top:6px">
-          <input type="date" id="weekStart" />
-          <button class="small" onclick="updateWeek()">Set Week</button>
+    <!-- ROTA -->
+    <div class="card" id="rotaArea">
+      <div id="rotaContent">
+        <h2 style="text-align:center;font-size:20px;margin-bottom:12px" id="weekTitle">
+          Weekly Rota
+        </h2>
+
+        <div class="sectionTitle">Royal Java</div>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr id="royalHeader"></tr></thead>
+            <tbody id="royalJava"></tbody>
+          </table>
+        </div>
+
+        <div class="sectionTitle">Taboche</div>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr id="tabocheHeader"></tr></thead>
+            <tbody id="taboche"></tbody>
+          </table>
         </div>
       </div>
 
-      <div style="margin-top:10px" class="actions">
-        <button class="small" onclick="saveToLocal()">Save Rota</button>
-        <button class="small" onclick="loadFromLocal()">Load Saved</button>
-        <button class="small" onclick="clearSaved()">Clear Saved</button>
-      </div>
-
-      <div class="note">Mid shift is <strong>9AM-7PM</strong>. Use per-day selects to set Morning, Mid, Closing or OFF for any day.</div>
-    </div>
-
-    <div class="card" id="rota" aria-label="Rota area">
-      <h2 id="weekTitle">Weekly Rota</h2>
-
-      <h3>Royal Java</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr id="royalHeader"></tr></thead>
-          <tbody id="royalJava"></tbody>
-        </table>
-      </div>
-
-      <h3 style="margin-top:18px">Taboche</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr id="tabocheHeader"></tr></thead>
-          <tbody id="taboche"></tbody>
-        </table>
-      </div>
-
-      <div class="actions" style="margin-top:12px">
-        <button onclick="exportImage()">Export as Image</button>
+      <div id="exportButtons">
+        <button onclick="exportImage()">⬇️ Export as Image</button>
         <button class="small" onclick="downloadCSV()">Download CSV</button>
         <button class="small" onclick="shareViaWhatsApp()">📱 Share to WhatsApp</button>
       </div>
-
-      <div class="footer">Tip: Click on any shift dropdown to change it. Staff member's off day and default shift are set during creation.</div>
+      <div id="footerMsg">Tip: Click any dropdown to update shifts.</div>
     </div>
   </div>
 </div>
 
 <script>
-/* ---------------------------
-   Full Rota System
-   - Per-day editable schedule stored per-date
-   - Mid shift set to 9AM–7PM
-   - Clean table with just staff names and shift selects
-   - Save/Load to localStorage, CSV export, PNG export
-   - WhatsApp share
-   --------------------------- */
-
-let staff = []; // each staff: {name, restaurant, offDay, defaultShiftType, defaultShift, schedule: { "YYYY-MM-DD": "shiftValue" } }
+let staff = [];
 const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const shiftsRoyal=[
+  {value:"OFF",label:"OFF"},
+  {value:"7AM–5PM",label:"7AM–5PM"},
+  {value:"9AM–7PM",label:"9AM–7PM"},
+  {value:"11AM–9PM",label:"11AM–9PM"}];
+const shiftsTaboche=[
+  {value:"OFF",label:"OFF"},
+  {value:"7AM–5PM",label:"7AM–5PM"},
+  {value:"9AM–7PM",label:"9AM–7PM"},
+  {value:"10AM–8PM",label:"10AM–8PM"}];
+let currentWeekDates=[];
 
-// Updated shift times (Mid = 9AM–7PM)
-const shiftsRoyal = [
-  { value: "OFF", label: "OFF" },
-  { value: "7AM–5PM", label: "7AM–5PM" },
-  { value: "9AM–7PM", label: "9AM–7PM" },
-  { value: "11AM–9PM", label: "11AM–9PM" }
-];
-
-const shiftsTaboche = [
-  { value: "OFF", label: "OFF" },
-  { value: "7AM–5PM", label: "7AM–5PM" },
-  { value: "9AM–7PM", label: "9AM–7PM" },
-  { value: "10AM–8PM", label: "10AM–8PM" }
-];
-
-let currentWeekDates = []; // array of Date objects for the week
-
-/* LOGIN SYSTEM */
+/* LOGIN */
 function login(){
-  const user = document.getElementById("username").value.trim();
-  const pass = document.getElementById("password").value;
-
-  if(user === "royaljava" && pass === "Incorrect90!"){
-    document.getElementById("loginScreen").style.display = "none";
-    const app = document.getElementById("app");
-    app.style.display = "block";
-    app.setAttribute("aria-hidden","false");
+  const u=document.getElementById("username").value.trim();
+  const p=document.getElementById("password").value;
+  if(u==="royaljava"&&p==="Incorrect90!"){
+    document.getElementById("loginScreen").style.display="none";
+    const app=document.getElementById("app");app.style.display="block";
     initializeWeekToCurrentSunday();
-    loadFromLocal(); // attempt to load saved rota automatically
-  } else {
-    const err = document.getElementById("errorMsg");
-    err.style.display = "block";
-    setTimeout(()=> err.style.display = "none", 3000);
+    loadFromLocal();
+  }else{
+    const e=document.getElementById("errorMsg");
+    e.style.display="block";setTimeout(()=>e.style.display="none",3000);
   }
 }
-
-/* Initialize week start to the most recent Sunday without mutating today's date */
 function initializeWeekToCurrentSunday(){
-  const today = new Date();
-  const sunday = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay());
-  document.getElementById("weekStart").valueAsDate = sunday;
-  updateWeek();
+  const today=new Date();const sun=new Date(today.getFullYear(),today.getMonth(),today.getDate()-today.getDay());
+  document.getElementById("weekStart").valueAsDate=sun;updateWeek();
 }
-
-/* Add staff */
+function mapDefaultShift(t,r){
+  const o=r==="Royal Java"?shiftsRoyal:shiftsTaboche;
+  if(t==="Morning")return o[1].value;
+  if(t==="Mid")return o[2].value;
+  return o[3].value;
+}
 function addStaff(){
-  const name = document.getElementById("name").value.trim();
-  const restaurant = document.getElementById("restaurant").value;
-  const offDay = document.getElementById("offDay").value;
-  const defaultShiftType = document.getElementById("defaultShiftType").value;
-
-  if(!name) return alert("Enter staff name");
-
-  const defaultShift = mapDefaultShift(defaultShiftType, restaurant);
-
-  staff.push({
-    name,
-    restaurant,
-    offDay,
-    defaultShiftType,
-    defaultShift,
-    schedule: {} // per-date overrides stored here
-  });
-
-  document.getElementById("name").value = "";
+  const n=document.getElementById("name").value.trim();
+  if(!n)return alert("Enter name");
+  const r=document.getElementById("restaurant").value;
+  const off=document.getElementById("offDay").value;
+  const dType=document.getElementById("defaultShiftType").value;
+  const shift=mapDefaultShift(dType,r);
+  staff.push({name:n,restaurant:r,offDay:off,defaultShiftType:dType,defaultShift:shift,schedule:{}});
+  document.getElementById("name").value="";
   renderRota();
 }
-
-/* Map default shift type to the exact shift string for the chosen restaurant */
-function mapDefaultShift(type, restaurant){
-  const options = restaurant === "Royal Java" ? shiftsRoyal : shiftsTaboche;
-  if(type === "Morning") return options[1].value;
-  if(type === "Mid") return options[2].value; // 9AM–7PM
-  return options[3].value; // Closing
-}
-
-/* Update week based on date input */
 function updateWeek(){
-  const start = document.getElementById("weekStart").value;
-  if(!start) return alert("Select a week start date");
-
-  const startDate = new Date(start);
-  currentWeekDates = [];
-  for(let i=0;i<7;i++){
-    const d = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + i);
-    currentWeekDates.push(d);
-  }
-
-  const endDate = currentWeekDates[6];
-  document.getElementById("weekTitle").innerText =
-    `Weekly Rota (${startDate.toDateString()} - ${endDate.toDateString()})`;
-
-  renderHeaders();
-  renderRota();
+  let start=document.getElementById("weekStart").value;if(!start)return;
+  let sd=new Date(start);sd=new Date(sd.getFullYear(),sd.getMonth(),sd.getDate()-sd.getDay());
+  currentWeekDates=[];for(let i=0;i<7;i++){currentWeekDates.push(new Date(sd.getFullYear(),sd.getMonth(),sd.getDate()+i));}
+  const end=currentWeekDates[6];
+  document.getElementById("weekTitle").innerText=`Weekly Rota (${sd.toDateString()} - ${end.toDateString()})`;
+  renderHeaders();renderRota();
 }
-
-/* Render table headers - only "Staff" as the first column header */
 function renderHeaders(){
-  const header = "<th>Staff</th>" +
-    currentWeekDates.map(d => `<th>${days[d.getDay()]}<br>${d.getDate()}</th>`).join("");
-
-  document.getElementById("royalHeader").innerHTML = header;
-  document.getElementById("tabocheHeader").innerHTML = header;
+  const h="<th>Staff</th>"+currentWeekDates.map(d=>`<th>${days[d.getDay()]}<br>${d.getDate()}</th>`).join("");
+  document.getElementById("royalHeader").innerHTML=h;
+  document.getElementById("tabocheHeader").innerHTML=h;
 }
-
-/* Determine CSS class for a shift value */
-function getShiftClass(shift){
-  if(shift === "OFF") return "off";
-  if(shift === "7AM–5PM") return "morning";
-  if(shift === "9AM–7PM") return "mid";
-  if(shift === "11AM–9PM" || shift === "10AM–8PM") return "closing";
-  return "mid";
+function getShiftClass(s){
+  if(s==="OFF")return"off";
+  if(s==="7AM–5PM")return"morning";
+  if(s==="9AM–7PM")return"mid";
+  if(s==="11AM–9PM"||s==="10AM–8PM")return"closing";
+  return"mid";
 }
-
-/* Build options HTML for a given restaurant's shift list and selected value */
-function buildShiftOptions(shiftList, selectedValue){
-  return shiftList.map(s => `<option value="${s.value}" ${s.value === selectedValue ? "selected" : ""}>${s.label}</option>`).join("");
-}
-
-/* Format date as YYYY-MM-DD for keys */
-function dateKey(d){
-  const y = d.getFullYear();
-  const m = String(d.getMonth()+1).padStart(2,'0');
-  const day = String(d.getDate()).padStart(2,'0');
-  return `${y}-${m}-${day}`;
-}
-
+function dateKey(d){return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function escapeHtml(s){return String(s).replace(/[&<>"'`=\/]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;','/':'&#x2F;','`':'&#x60;','=':'&#x3D;'}[c]));}
+function escapeJs(s){return String(s).replace(/'/g,"\\'").replace(/"/g,'\\"');}
 function renderRota(){
-  const royalBody = document.getElementById("royalJava");
-  const tabBody = document.getElementById("taboche");
-  royalBody.innerHTML = "";
-  tabBody.innerHTML = "";
-
-  staff.forEach((member, idx) => {
-    const row = document.createElement("tr");
-    const shiftOptions = member.restaurant === "Royal Java" ? shiftsRoyal : shiftsTaboche;
-
-    // Staff name cell - just the name, no controls
-    let cells = `<td><strong>${escapeHtml(member.name)}</strong></td>`;
-
-    currentWeekDates.forEach(d => {
-      const key = dateKey(d);
-      const dayName = days[d.getDay()];
-      const isOff = dayName === member.offDay;
-      const selected = (member.schedule && member.schedule[key]) ? member.schedule[key] : (isOff ? "OFF" : member.defaultShift);
-      const cls = getShiftClass(selected);
-
-      cells += `<td>
-        <select class="shift ${cls}" onchange="onShiftChange(${idx}, '${escapeJs(member.restaurant)}', '${key}', this)">
-          ${shiftOptions.map(s => `<option value="${s.value}" ${s.value === selected ? "selected" : ""}>${s.label}</option>`).join("")}
-        </select>
-      </td>`;
+  const rB=document.getElementById("royalJava"),tB=document.getElementById("taboche");
+  rB.innerHTML="";tB.innerHTML="";
+  staff.forEach((m,i)=>{
+    const row=document.createElement("tr");
+    const sList=m.restaurant==="Royal Java"?shiftsRoyal:shiftsTaboche;
+    let html=`<td><strong>${escapeHtml(m.name)}</strong></td>`;
+    currentWeekDates.forEach(d=>{
+      const k=dateKey(d);const day=days[d.getDay()];
+      const isOff=day===m.offDay;
+      const sel=m.schedule[k]||(isOff?"OFF":m.defaultShift);
+      const cls=getShiftClass(sel);
+      html+=`<td><select class="shift ${cls}" onchange="onShiftChange(${i},'${escapeJs(m.restaurant)}','${k}',this)">${sList.map(s=>`<option value="${s.value}" ${s.value===sel?"selected":""}>${s.label}</option>`).join("")}</select></td>`;
     });
-
-    row.innerHTML = cells;
-    if(member.restaurant === "Royal Java") royalBody.appendChild(row);
-    else tabBody.appendChild(row);
+    row.innerHTML=html;
+    (m.restaurant==="Royal Java"?rB:tB).appendChild(row);
   });
 }
-
-/* Handler when a shift select changes for a specific date */
-function onShiftChange(staffIndex, restaurant, dateKeyStr, selectEl){
-  const newValue = selectEl.value;
-  selectEl.className = 'shift ' + getShiftClass(newValue);
-
-  if(!staff[staffIndex].schedule) staff[staffIndex].schedule = {};
-
-  const member = staff[staffIndex];
-  const dateParts = dateKeyStr.split('-');
-  const d = new Date(Number(dateParts[0]), Number(dateParts[1]) - 1, Number(dateParts[2]));
-  const dayName = days[d.getDay()];
-  const implied = (dayName === member.offDay) ? "OFF" : member.defaultShift;
-
-  if(newValue === implied){
-    if(member.schedule && member.schedule[dateKeyStr]) delete member.schedule[dateKeyStr];
-  } else {
-    member.schedule[dateKeyStr] = newValue;
-  }
-
-  renderRota();
+function onShiftChange(i,r,k,el){
+  const val=el.value;el.className="shift "+getShiftClass(val);
+  const mem=staff[i];const parts=k.split('-');const d=new Date(parts[0],parts[1]-1,parts[2]);
+  const day=days[d.getDay()];const implied=(day===mem.offDay)?"OFF":mem.defaultShift;
+  if(val===implied)delete mem.schedule[k];else mem.schedule[k]=val;
 }
 
-/* Export rota area as PNG */
+/* EXPORT clean premium image */
 function exportImage(){
-  const el = document.querySelector("#rota");
-  html2canvas(el, { backgroundColor: "#ffffff", scale: 2 }).then(canvas => {
-    const link = document.createElement("a");
-    link.download = "rota.png";
-    link.href = canvas.toDataURL("image/png");
+  const btns=document.getElementById("exportButtons"),foot=document.getElementById("footerMsg");
+  btns.style.display="none";foot.style.display="none";
+  const el=document.getElementById("rotaContent");
+  el.style.boxShadow="0 0 40px rgba(0,0,0,0.1)";
+  el.style.borderRadius="12px";
+  el.style.padding="30px";
+  el.scrollIntoView({behavior:"instant",block:"start"});window.scrollTo(0,0);
+  html2canvas(el,{backgroundColor:"#ffffff",scale:3,scrollY:-window.scrollY,windowHeight:document.body.scrollHeight}).then(c=>{
+    const link=document.createElement("a");
+    link.download="Premium_Rota.png";
+    link.href=c.toDataURL("image/png");
     link.click();
-  }).catch(err => {
-    alert("Export failed. Try again.");
-    console.error(err);
-  });
+  }).finally(()=>{btns.style.display="flex";foot.style.display="block";});
 }
 
-/* Download a simple CSV representation of the current rota */
-function downloadCSV(){
-  if(currentWeekDates.length !== 7) return alert("Set the week first.");
-  let csv = "Restaurant,Staff";
-  currentWeekDates.forEach(d => csv += `,${days[d.getDay()]} ${d.getDate()}`);
-  csv += "\n";
+/* SHARE to WhatsApp cleanly */
+function shareViaWhatsApp(){
+  if(currentWeekDates.length!==7)return alert("Set week first.");
+  const btns=document.getElementById("exportButtons"),foot=document.getElementById("footerMsg");
+  btns.style.display="none";foot.style.display="none";
+  const el=document.getElementById("rotaContent");
+  el.scrollIntoView({behavior:"instant",block:"start"});window.scrollTo(0,0);
+  html2canvas(el,{backgroundColor:"#ffffff",scale:3,useCORS:true,scrollY:-window.scrollY,windowHeight:document.body.scrollHeight})
+  .then(c=>{
+    const link=document.createElement("a");
+    link.download="Premium_Rota.png";
+    link.href=c.toDataURL("image/png");
+    link.click();
+    alert("📸 Premium rota image ready. Open WhatsApp Web and send the downloaded image.");
+    window.open("https://web.whatsapp.com/","_blank");
+  }).finally(()=>{btns.style.display="flex";foot.style.display="block";});
+}
 
-  const groups = ["Royal Java","Taboche"];
-  groups.forEach(g => {
-    staff.filter(s => s.restaurant === g).forEach(member => {
-      const row = [g, member.name];
-      currentWeekDates.forEach(d => {
-        const key = dateKey(d);
-        const dayName = days[d.getDay()];
-        const isOff = dayName === member.offDay;
-        const value = (member.schedule && member.schedule[key]) ? member.schedule[key] : (isOff ? "OFF" : member.defaultShift);
-        row.push(value);
+/* CSV + Save */
+function downloadCSV(){
+  let csv="Restaurant,Staff";
+  currentWeekDates.forEach(d=>csv+=`,${days[d.getDay()]} ${d.getDate()}`);
+  csv+="\n";
+  ["Royal Java","Taboche"].forEach(g=>{
+    staff.filter(s=>s.restaurant===g).forEach(m=>{
+      const row=[g,m.name];
+      currentWeekDates.forEach(d=>{
+        const k=dateKey(d);const day=days[d.getDay()];
+        const isOff=day===m.offDay;
+        const val=m.schedule[k]||(isOff?"OFF":m.defaultShift);
+        row.push(val);
       });
-      csv += row.map(v => `"${v}"`).join(",") + "\n";
+      csv+=row.map(v=>`"${v}"`).join(",")+"\n";
     });
   });
-
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "rota.csv";
-  a.click();
+  const blob=new Blob([csv],{type:"text/csv"});const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");a.href=url;a.download="rota.csv";a.click();
   URL.revokeObjectURL(url);
 }
-
-/* Share rota via WhatsApp (formatted text) */
-function shareViaWhatsApp(){
-  if(currentWeekDates.length !== 7) return alert("Set the week first.");
-
-  const weekStart = currentWeekDates[0].toDateString();
-  const weekEnd = currentWeekDates[6].toDateString();
-
-  let message = `🗓️ *WEEKLY ROTA* (${weekStart} - ${weekEnd})\n\n`;
-
-  const groups = ["Royal Java", "Taboche"];
-
-  groups.forEach(g => {
-    message += `*${g}*\n`;
-    staff.filter(s => s.restaurant === g).forEach(member => {
-      let line = `${member.name}: `;
-      currentWeekDates.forEach(d => {
-        const key = dateKey(d);
-        const dayName = days[d.getDay()];
-        const isOff = dayName === member.offDay;
-        const value = (member.schedule && member.schedule[key]) ? member.schedule[key] : (isOff ? "OFF" : member.defaultShift);
-
-        // shorten shift for compact display
-        let short = value.replace(/[–-].*$/,'');
-        if(short === "OFF") short = "❌";
-        else if(short === "7AM") short = "🌅";
-        else if(short === "9AM") short = "☀️";
-        else if(short === "11AM" || short === "10AM") short = "🌙";
-        else short = value;
-
-        line += ` ${short}`;
-      });
-      message += line + "\n";
-    });
-    message += "\n";
-  });
-
-  message += "_Generated by Restaurant Rota System_";
-
-  const encoded = encodeURIComponent(message);
-  window.open(`https://wa.me/?text=${encoded}`, '_blank');
-}
-
-/* Reset everything to start fresh */
-function resetRota(){
-  if(!confirm("Reset all staff and week to current week?")) return;
-  staff = [];
-  initializeWeekToCurrentSunday();
-  renderRota();
-  localStorage.removeItem("savedRota");
-}
-
-/* Save current rota (staff + weekStart) to localStorage */
-function saveToLocal(){
-  if(currentWeekDates.length !== 7) return alert("Set the week first.");
-  const startKey = dateKey(currentWeekDates[0]);
-  const payload = {
-    weekStart: startKey,
-    staff
-  };
-  try{
-    localStorage.setItem("savedRota", JSON.stringify(payload));
-    alert("Rota saved locally.");
-  }catch(e){
-    console.error(e);
-    alert("Save failed.");
-  }
-}
-
-/* Load rota from localStorage if present */
-function loadFromLocal(){
-  try{
-    const raw = localStorage.getItem("savedRota");
-    if(!raw) return;
-    const payload = JSON.parse(raw);
-    if(payload && payload.weekStart){
-      const parts = payload.weekStart.split('-');
-      const d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
-      document.getElementById("weekStart").valueAsDate = d;
-      staff = payload.staff || [];
-      updateWeek();
-      renderRota();
-    }
-  }catch(e){
-    console.error(e);
-    alert("Load failed.");
-  }
-}
-
-/* Clear saved rota from localStorage */
-function clearSaved(){
-  if(!confirm("Clear saved rota from local storage?")) return;
-  localStorage.removeItem("savedRota");
-  alert("Saved rota cleared.");
-}
-
-/* Utility: escape HTML to avoid injection in names */
-function escapeHtml(str){
-  return String(str).replace(/[&<>"'`=\/]/g, function(s){
-    return ({
-      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','/':'&#x2F;','`':'&#x60;','=':'&#x3D;'
-    })[s];
-  });
-}
-
-/* Utility: escape JS string for inline attributes */
-function escapeJs(str){
-  return String(str).replace(/'/g, "\\'").replace(/"/g, '\\"');
-}
-
-/* Initialize on page load */
-window.addEventListener('DOMContentLoaded', () => {
-  const today = new Date();
-  const sunday = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay());
-  document.getElementById("weekStart").valueAsDate = sunday;
-});
+function saveToLocal(){localStorage.setItem("savedRota",JSON.stringify({weekStart:dateKey(currentWeekDates[0]),staff}));alert("Saved!");}
+function loadFromLocal(){const r=localStorage.getItem("savedRota");if(!r)return;const p=JSON.parse(r);const pr=p.weekStart.split('-');const d=new Date(pr[0],pr[1]-1,pr[2]);document.getElementById("weekStart").valueAsDate=d;staff=p.staff||[];updateWeek();}
+function clearSaved(){localStorage.removeItem("savedRota");alert("Cleared!");}
+function resetRota(){if(!confirm("Reset All?"))return;staff=[];initializeWeekToCurrentSunday();localStorage.removeItem("savedRota");}
+window.addEventListener('DOMContentLoaded',()=>{const t=new Date();const s=new Date(t.getFullYear(),t.getMonth(),t.getDate()-t.getDay());document.getElementById("weekStart").valueAsDate=s;});
 </script>
 </body>
 </html>
